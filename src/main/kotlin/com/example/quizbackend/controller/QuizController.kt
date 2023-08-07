@@ -1,5 +1,3 @@
-// src/main/kotlin/com/example/quizbackend/controller/QuizController.kt
-
 package com.example.quizbackend.controller
 
 import com.example.quizbackend.model.Question
@@ -8,7 +6,9 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api")
 class QuizController {
-    val secretKey: String = System.getenv("MY_SECRET_KEY") ?: "defaultKeyForLocalDevelopment"
+
+
+    private val secretKey: String = System.getenv("MY_SECRET_KEY") ?: "defaultKeyForLocalDevelopment"
 
     private var questions: MutableList<Question> = mutableListOf() // In-memory storage for simplicity
 
