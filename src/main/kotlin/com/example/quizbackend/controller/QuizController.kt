@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api")
 class QuizController {
+    val secretKey: String = System.getenv("MY_SECRET_KEY") ?: "defaultKeyForLocalDevelopment"
 
     private var questions: MutableList<Question> = mutableListOf() // In-memory storage for simplicity
 
@@ -16,7 +17,7 @@ class QuizController {
 
     @PostMapping("/update-questions")
     fun updateQuestions(@RequestBody newQuestions: List<Question>, @RequestParam secret: String): String {
-        if (secret == "YOUR_SECRET_KEY") {
+        if (secret == secretKey) {
             questions = newQuestions.toMutableList()
             return "Questions updated successfully!"
         } else {
